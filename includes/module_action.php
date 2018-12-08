@@ -43,7 +43,7 @@ function killRegex($regex){
 	
 	if (count($output) > 0) {
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 	}	
 }
 
@@ -57,10 +57,10 @@ function copyLogsHistory() {
 	
 	if ( 0 < filesize( $mod_logs ) ) {
 		$exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		$exec = "$bin_echo '' > $mod_logs";
-		//exec_fruitywifi($exec);
+		//exec_blackbulb($exec);
 	}
 }
 
@@ -68,14 +68,14 @@ if($service == "hopper") {
 	if ($action == "start") {
 		
 		$exec = "$bin_echo '' > $mod_logs";
-		//exec_fruitywifi($exec);
+		//exec_blackbulb($exec);
 		
 		# OPTIONS
 		if ($mod_hopper_channel != "" and $mod_hopper_jump == "1") $options_channel = "-c $mod_hopper_channel";
 		$mod_hopper_delay = trim($mod_hopper_delay);
 		
 		$exec = "python channel-hopping.py -i mon0 $options_channel -d $mod_hopper_delay > /dev/null 2 &";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 	
 	} else if($action == "stop") {
 	
@@ -91,10 +91,10 @@ if($service == "hopper") {
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     header("Location: ../../install.php?module=$mod_name");
     exit;
